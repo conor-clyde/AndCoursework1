@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DisplayGame extends AppCompatActivity {
     // Variable declarations
@@ -25,15 +26,15 @@ public class DisplayGame extends AppCompatActivity {
     private static final int ROLL_TYPE_PLAYER = 1;
     private static final int ROLL_TYPE_COM = 2;
 
-    private String[] fileName = {"die_face_1", "die_face_2", "die_face_3",
+    private final String[] fileName = {"die_face_1", "die_face_2", "die_face_3",
             "die_face_4", "die_face_5", "die_face_6"};
-    private String[] fileNameSel = {"die_face_1_sel", "die_face_2_sel", "die_face_3_sel",
+    private final String[] fileNameSel = {"die_face_1_sel", "die_face_2_sel", "die_face_3_sel",
             "die_face_4_sel", "die_face_5_sel", "die_face_6_sel"};
 
-    private int[] rerollOptions = {1, 1, 1, 1, 1};
-    private int[] rerollOptionsCom = {1, 1, 1, 1, 1};
-    private int[] dieScores = {0, 0, 0, 0, 0};
-    private int[] dieScoresCom = {0, 0, 0, 0, 0};
+    private final int[] rollOptions = {1, 1, 1, 1, 1};
+    private final int[] rollOptionsCom = {1, 1, 1, 1, 1};
+    private final int[] dieScores = {0, 0, 0, 0, 0};
+    private final int[] dieScoresCom = {0, 0, 0, 0, 0};
 
     private static int playerWins = 0;
     private static int comWins = 0;
@@ -44,12 +45,9 @@ public class DisplayGame extends AppCompatActivity {
     private int totalScoreCom = 0;
     private int noRolls = 0;
     private int goal = 0;
-    private int noDice = 5;
-    private int diceScoreComDec = 0;
-
+    private final int noDice = 5;
 
     private boolean tie = false;
-    private boolean comReroll;
 
     private TextView txtScore;
     private TextView txtScoreCom;
@@ -59,8 +57,8 @@ public class DisplayGame extends AppCompatActivity {
     private TextView txtDiceCom;
     private TextView txtWins;
 
-    private View vwHoriz;
-    private View vwVerti;
+    private View vwHorizontal;
+    private View vwVertical;
 
     private EditText edtGoal;
 
@@ -71,7 +69,6 @@ public class DisplayGame extends AppCompatActivity {
     private Button btnScore;
     private Button btnGoal;
 
-    private AlertDialog.Builder dialogBuilder;
     private AlertDialog alertDialog;
 
     @Override
@@ -97,14 +94,14 @@ public class DisplayGame extends AppCompatActivity {
         txtDice = findViewById(R.id.txtPlayerDice);
         txtDiceCom = findViewById(R.id.txtComDice);
 
-        edtGoal = findViewById(R.id.etxtGoal);
+        edtGoal = findViewById(R.id.editGoal);
 
         btnThrow = findViewById(R.id.btnThrow);
         btnScore = findViewById(R.id.btnScore);
         btnGoal = findViewById(R.id.btnGoal);
 
-        vwHoriz = findViewById(R.id.vwHoriz);
-        vwVerti = findViewById(R.id.vwVerti);
+        vwHorizontal = findViewById(R.id.vwHorizontal);
+        vwVertical = findViewById(R.id.vwVertical);
 
         // Create arrays for containing all player and computer dice image views
         playerDie = new ImageView[5];
@@ -125,27 +122,14 @@ public class DisplayGame extends AppCompatActivity {
 
     private void setClickListeners()
     {
-        btnGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboard();
-                startMatch();
-            }
+        btnGoal.setOnClickListener(view -> {
+            hideKeyboard();
+            startMatch();
         });
 
-        btnThrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleThrow();
-            }
-        });
+        btnThrow.setOnClickListener(view -> handleThrow());
 
-        btnScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleScore();
-            }
-        });
+        btnScore.setOnClickListener(view -> handleScore());
 
         // Handle user click for each player die
         setDieClickListener(R.id.imgPlayerDie1, 0);
@@ -157,32 +141,23 @@ public class DisplayGame extends AppCompatActivity {
 
     private void setDieClickListener(int id, final int index) {
         ImageView die = findViewById(id);
-        die.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleRerollOption(index);
-            }
-        });
+        die.setOnClickListener(view -> toggleRollOption(index));
     }
 
-    private void toggleRerollOption(int i) {
+    private void toggleRollOption(int i) {
         // Only act on a player die click if it is not the player's first roll
         if (noRolls != 0) {
             // Set the die that the player clicks as selected (change the background to indicate this)
             // However if a selected die is being clicked, revert it to unselected (remove the background which indicates selected)
-            if (rerollOptions[i] == 1) {
-                rerollOptions[i] = 0;
+            if (rollOptions[i] == 1) {
+                rollOptions[i] = 0;
 
-                // imageView.setImageResource(R.drawable.die_face_1);
                 String fileStr = fileNameSel[dieScores[i] - 1];
-                //String file = "/res/drawable/" + fileStr;
-                //Bitmap bitmap1 = BitmapFactory.decodeFile(file);
-                //playerDie[i].setImageBitmap(bitmap1);
 
                 int resourceId = this.getResources().getIdentifier(fileStr, "drawable", this.getPackageName());
                 playerDie[i].setImageResource(resourceId);
             } else {
-                rerollOptions[i] = 1;
+                rollOptions[i] = 1;
 
                 setDieImage(dieScores[i], i, playerDie);
             }
@@ -195,8 +170,8 @@ public class DisplayGame extends AppCompatActivity {
         // Catch block prevents app crashing by skipping the code to remove keyboard if it is not present
         try {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        } catch (Exception e) {
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+        } catch (Exception ignored) {
         }
     }
 
@@ -207,7 +182,7 @@ public class DisplayGame extends AppCompatActivity {
 
         // If game is in a "tie" state, perform different actions
         // Computer dice is rolled along with player roll then the score is checked to check if either has won the game yet
-        if (tie == true) {
+        if (tie) {
             rollDice(ROLL_TYPE_COM);
             handleScore();
         }
@@ -239,12 +214,12 @@ public class DisplayGame extends AppCompatActivity {
 
     private void handleScore()
     {
-        if (tie == true)
-            // If game is in tie state, remove score button as player can only throw once in a roun
+        if (tie)
+            // If game is in tie state, remove score button as player can only throw once in a turn
             btnScore.setVisibility(INVISIBLE);
         else
             // If game is not in a tie state
-            // Computer decides whether it would like to use its two optional rerolls
+            // Computer decides whether it would like to use its two optional extra rolls
             comDecision();
 
         // Dice totals are checked
@@ -263,7 +238,7 @@ public class DisplayGame extends AppCompatActivity {
         try {
             if (!validInt(edtGoal.getText().toString()))
                 txtInstruct.setText("Set the match goal to start!\nError: Please enter a numerical goal.");
-            else if (!validIntLimit(Integer.parseInt(edtGoal.getText().toString()), 1000, 0))
+            else if (!validIntLimit(Integer.parseInt(edtGoal.getText().toString())))
                 txtInstruct.setText("Set the match goal to start!\nError: Goal must not exceed 1000 or be a negative value");
             else {
                 // Assign user inputted goal to the goal variable to be used in the game
@@ -282,8 +257,8 @@ public class DisplayGame extends AppCompatActivity {
                 txtScoreCom.setVisibility(VISIBLE);
                 txtDice.setVisibility(VISIBLE);
                 txtDiceCom.setVisibility(VISIBLE);
-                vwHoriz.setVisibility(VISIBLE);
-                vwVerti.setVisibility(VISIBLE);
+                vwHorizontal.setVisibility(VISIBLE);
+                vwVertical.setVisibility(VISIBLE);
 
                 // If this is not the first match, reset game variables so that the player can play the new match
                 if (playerWins != 0 && comWins != 0)
@@ -299,7 +274,7 @@ public class DisplayGame extends AppCompatActivity {
     private boolean validInt(String text)
     {
         // Check if every character in the user's input is an integer. Return true if they are, otherwise return false.
-        Boolean valid = true;
+        boolean valid = true;
 
         for (int a=0; a < text.length(); a++) {
             if (a == 0 && text.charAt(a) == '-')
@@ -308,26 +283,20 @@ public class DisplayGame extends AppCompatActivity {
                 valid = false;
         }
 
-        if (valid)
-            return true;
-        else
-            return false;
+        return valid;
     }
 
-    private boolean validIntLimit(int num, int max, int min)
+    private boolean validIntLimit(int num)
     {
         // Check if number is between the max and min. Return true if it is, otherwise return false
-        if (num > max || num < min)
-            return false;
-        else
-            return true;
+        return num <= 1000 && num >= 0;
     }
 
     private void resetMatch() {
         Arrays.fill(dieScores, 0);
         Arrays.fill(dieScoresCom, 0);
-        Arrays.fill(rerollOptions, 1);
-        Arrays.fill(rerollOptionsCom, 1);
+        Arrays.fill(rollOptions, 1);
+        Arrays.fill(rollOptionsCom, 1);
 
         tie = false;
         diceScore = 0;
@@ -342,20 +311,20 @@ public class DisplayGame extends AppCompatActivity {
 
     private void resetRound()
     {
-        if (tie == false)
+        if (!tie)
             // If a tie is not ongoing, display the previous round scoring and current instructions
-            txtInstruct.setText("You Scored " + Integer.toString(diceScore) + "!\nOpponent scored " + Integer.toString(diceScoreCom) + ".\nClick throw to roll (3 rolls left)");
+            txtInstruct.setText("You Scored " + diceScore + "!\nOpponent scored " + diceScoreCom + ".\nClick throw to roll (3 rolls left)");
 
         // Display player and computer scores to the player
-        txtScore.setText("Score: " + Integer.toString(totalScore));
-        txtScoreCom.setText("Com Score: " + Integer.toString(totalScoreCom));
+        txtScore.setText("Score: " + totalScore);
+        txtScoreCom.setText("Com Score: " + totalScoreCom);
 
         // Hide the score button as user can only throw at the start of a round
         btnScore.setVisibility(INVISIBLE);
 
         // Remove the black border from each die that was selected to not be rerolled in the prior round
         for (int i = 0; i < noDice; i++) {
-            if (rerollOptions[i] == 0)
+            if (rollOptions[i] == 0)
                 setDieImage(dieScores[i], i, playerDie);
         }
 
@@ -364,8 +333,8 @@ public class DisplayGame extends AppCompatActivity {
         diceScore = 0;
         diceScoreCom = 0;
 
-        Arrays.fill(rerollOptions, 1);
-        Arrays.fill(rerollOptionsCom, 1);
+        Arrays.fill(rollOptions, 1);
+        Arrays.fill(rollOptionsCom, 1);
     }
 
     private void getDiceTotal()
@@ -401,7 +370,7 @@ public class DisplayGame extends AppCompatActivity {
                 showResults("win");
             }
             // Check if the computer's total score is greater than the player's total score, i.e. the player lost
-            else if (totalScoreCom > totalScore) {
+            else {
                 // Increase the total number of computer wins to be displayed at the top of the next game
                 comWins++;
 
@@ -418,36 +387,28 @@ public class DisplayGame extends AppCompatActivity {
         // For each player and computer die
         for (int i = 0; i < noDice; i++) {
             // Check if player/computer wants to roll the current dice and only roll it if they do
-            if ((type == ROLL_TYPE_PLAYER && rerollOptions[i] == 1) || (type == ROLL_TYPE_COM && rerollOptionsCom[i] == 1)) {
+            if ((type == ROLL_TYPE_PLAYER && rollOptions[i] == 1) || (type == ROLL_TYPE_COM && rollOptionsCom[i] == 1)) {
                 // Get a random value between MIN (1) nad MAX (6)
-                randVal[i] = randomNumbers(MIN, MAX);
+                randVal[i] = randomNumbers();
 
                 // If player roll, add random value to player die score array
                 if (type == ROLL_TYPE_PLAYER)
                     dieScores[i] = randVal[i];
                 // If computer roll, add random value to computer die score array
-                else if (type == ROLL_TYPE_COM)
-                    dieScoresCom[i] = randVal[i];
+                else dieScoresCom[i] = randVal[i];
 
                 // If player roll, set the correct image for the value scored to their die
                 if (type == ROLL_TYPE_PLAYER)
                     setDieImage(randVal[i], i, playerDie);
                 // If computer roll, set the correct image for the value scored to their die
-                else if (type == ROLL_TYPE_COM)
-                    setDieImage(randVal[i], i, comDie);
+                else setDieImage(randVal[i], i, comDie);
             }
         }
     }
 
     private void setDieImage(int randVal, int i, ImageView[] die)
     {
-        // Set up the path to the required image depending on the score being set to the die
-        // Then set that image as the die image
-        // imageView.setImageResource(R.drawable.die_face_1);
         String fileStr = fileName[randVal - 1];
-        //String file = "/res/drawable/" + fileStr;
-        //Bitmap bitmap1 = BitmapFactory.decodeFile(file);
-        //die[i].setImageBitmap(bitmap1);
 
         int resourceId = this.getResources().getIdentifier(fileStr, "drawable", this.getPackageName());
         die[i].setImageResource(resourceId);
@@ -455,22 +416,17 @@ public class DisplayGame extends AppCompatActivity {
 
     public void showResults(String status) {
         // Initialise an AlertDialog which will display the player's match results
-        dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         alertDialog = dialogBuilder.create();
 
         // Set up a button on the alertDialog which will allow the player to return to the game menu as the current match is finished
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Return to Game Menu", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                navigateUpTo(new Intent(getBaseContext(), MainActivity.class));
-            }
-        });
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Return to Game Menu", (dialog, which) -> navigateUpTo(new Intent(getBaseContext(), MainActivity.class)));
 
         // Do not allow player to click out of alertDialog. They can only click the return to game menu button
         alertDialog.setCancelable(false);
 
         // If the player won
-        if (tie == true)
+        if (tie)
             // If a tied was settled, describe the tie winner
             alertDialog.setMessage("Tie settled!\nYou scored " + diceScore + " (Total: " + totalScore + ")\nOpponent scored " + diceScoreCom + " (Total: " + totalScoreCom + ")");
         else
@@ -513,7 +469,7 @@ public class DisplayGame extends AppCompatActivity {
         // If variable is not empty
         if (textViewId != 0) {
             // Initialise alert title as textview and set its text colour property
-            TextView tv = (TextView) alertDialog.findViewById(textViewId);
+            TextView tv = alertDialog.findViewById(textViewId);
             tv.setTextColor(Color.parseColor(color));
         }
     }
@@ -550,8 +506,8 @@ public class DisplayGame extends AppCompatActivity {
 
     private void comDecision()
     {
-        comReroll = false;
-        diceScoreComDec = 0;
+        boolean comRoll = false;
+        int diceScoreComDec = 0;
 
         // Add up computer's current round score to assist its decision making
         for (int dieScoreCom : dieScoresCom)
@@ -559,51 +515,47 @@ public class DisplayGame extends AppCompatActivity {
 
         // For each of the computer's two re-roll options
         for (int i=0; i < 2; i++) {
-            // If on second loop and computer did not use their first re-roll, skip over the second reroll deicison
-            if (i != 0 && comReroll == false)
-                break;
+            // If on second loop and computer did not use their first re-roll, skip over the second re-roll decision
 
             // If computer's current round score is under 16, re-roll every die that is lower than four
             if (diceScoreComDec < 16) {
-                comReroll = true;
+                comRoll = true;
 
                 for (int j = 0; j < noDice; j++) {
                     if (dieScoresCom[j] >= 4)
-                        rerollOptionsCom[j] = 0;
+                        rollOptionsCom[j] = 0;
                 }
             }
 
             // If computer is losing and their current round score is under 21, re-roll every die that is lower than four
-            if (comReroll == false && (totalScoreCom < totalScore) && diceScoreComDec < 21) {
-                comReroll = true;
+            if (!comRoll && (totalScoreCom < totalScore) && diceScoreComDec < 21) {
+                comRoll = true;
 
                 for (int j = 0; j < noDice; j++) {
                     if (dieScoresCom[j] >= 4)
-                        rerollOptionsCom[j] = 0;
+                        rollOptionsCom[j] = 0;
                 }
             }
 
             // If the computer has not decided to re-roll yet, re-roll every one and two valued dice
-            if (comReroll == false) {
-                comReroll = true;
+            if (!comRoll) {
+                comRoll = true;
 
                 for (int j = 0; j < noDice; j++) {
                     if (dieScoresCom[j] >= 3)
-                        rerollOptionsCom[j] = 0;
+                        rollOptionsCom[j] = 0;
                 }
             }
 
             // Perform the re-roll if the computer decided to perform one
-            if (comReroll == true)
-                rollDice(ROLL_TYPE_COM);
+            rollDice(ROLL_TYPE_COM);
         }
     }
 
-    private int randomNumbers(int min, int max) {
-        int range = max - min + 1;
+    private int randomNumbers() {
+        int range = DisplayGame.MAX - DisplayGame.MIN + 1;
 
         // Generate a random number within min and max
-        int randNumber = (int) (Math.random() * range) + min;
-        return randNumber;
+        return (int) (Math.random() * range) + DisplayGame.MIN;
     }
 }

@@ -9,7 +9,7 @@
     tools:context=".DisplayGame">
 
     <View
-        android:id="@+id/vwVerti"
+        android:id="@+id/vwVertical"
         android:layout_width="2dp"
         android:layout_height="420dp"
         android:background="@android:color/darker_gray"
@@ -19,14 +19,14 @@
         app:layout_constraintStart_toEndOf="@+id/imgPlayerDie4" />
 
     <View
-        android:id="@+id/vwHoriz"
+        android:id="@+id/vwHorizontal"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/vwVerti"
+        app:layout_constraintBottom_toTopOf="@+id/vwVertical"
         app:layout_constraintStart_toEndOf="@+id/imgPlayerDie4" />
 
     <ImageView
@@ -34,6 +34,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie4"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@drawable/die_face_1" />
@@ -45,15 +46,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
+        android:contentDescription="@string/img_dice"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtGoal"
+        app:layout_constraintTop_toBottomOf="@+id/editGoal"
         tools:srcCompat="@drawable/die_face_1" />
 
     <ImageView
         android:id="@+id/imgPlayerDie2"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie3"
         app:layout_constraintStart_toEndOf="@+id/imgPlayerDie3"
         tools:srcCompat="@drawable/die_face_1" />
@@ -62,6 +67,7 @@
         android:id="@+id/imgPlayerDie4"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie5"
         app:layout_constraintStart_toEndOf="@+id/imgPlayerDie5"
         tools:srcCompat="@drawable/die_face_1" />
@@ -72,6 +78,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/btnThrow"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@drawable/die_face_1" />
@@ -99,7 +106,6 @@
         android:layout_marginBottom="16dp"
         android:width="150dp"
         android:backgroundTint="@android:color/black"
-        android:onClick="displayGame"
         android:text="@string/btn_score"
         android:textSize="16sp"
         android:visibility="invisible"
@@ -111,6 +117,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgComDie5"
         app:layout_constraintEnd_toStartOf="@+id/imgComDie5"
         tools:srcCompat="@drawable/die_face_1" />
@@ -120,6 +127,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgComDie4"
         app:layout_constraintEnd_toStartOf="@+id/imgComDie4"
         tools:srcCompat="@drawable/die_face_1" />
@@ -129,6 +137,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgComDie3"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@drawable/die_face_1" />
@@ -138,6 +147,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/imgComDie1"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@drawable/die_face_1" />
@@ -148,6 +158,7 @@
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/img_dice"
         app:layout_constraintBottom_toTopOf="@+id/btnScore"
         app:layout_constraintEnd_toStartOf="@+id/imgComDie5"
         tools:srcCompat="@drawable/die_face_1" />
@@ -158,7 +169,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Score: 0"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:visibility="invisible"
@@ -171,7 +181,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Goal:"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:visibility="invisible"
@@ -184,7 +193,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Set the match goal to start!"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +204,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="Com Score: 0"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:visibility="invisible"
@@ -204,7 +211,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtWins" />
 
     <EditText
-        android:id="@+id/etxtGoal"
+        android:id="@+id/editGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -213,11 +220,13 @@
         android:width="140dp"
         android:ems="10"
         android:inputType="text"
-        android:text="101"
+        android:minHeight="48dp"
+        android:text="@string/edit_goal"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/btnGoal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInstruct" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInstruct"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btnGoal"
@@ -226,10 +235,9 @@
         android:layout_marginEnd="8dp"
         android:width="150dp"
         android:backgroundTint="@android:color/black"
-        android:onClick="displayGame"
-        android:text="Set Goal"
+        android:text="@string/btn_goal"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etxtGoal"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editGoal"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -238,7 +246,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="H:0/C:0"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -249,12 +256,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:text="Com Dice"
+        android:text="@string/txt_comDice"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/txtPlayerDice"
-        app:layout_constraintStart_toEndOf="@+id/vwVerti" />
+        app:layout_constraintStart_toEndOf="@+id/vwVertical" />
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
@@ -267,11 +274,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="16dp"
-        android:text="Your Dice"
+        android:text="@string/txt_playerDice"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/vwVerti"
-        app:layout_constraintEnd_toStartOf="@+id/vwVerti" />
+        app:layout_constraintBottom_toTopOf="@+id/vwVertical"
+        app:layout_constraintEnd_toStartOf="@+id/vwVertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

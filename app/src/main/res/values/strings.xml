@@ -4,7 +4,13 @@
     <string name="btn_newGame">New Game</string>
     <string name="txt_studentID">Student ID: B00785461</string>
     <string name="txt_studentName">Student Name: Conor Clyde</string>
-    <string name="txt_declare">I declare that this is all my own work. Any material I have referred to has been accurately referenced and any contribution of Artificial Intelligence technology has been fully acknowledged. I have read the University’s policy on academic misconduct and understand the different forms of academic misconduct. If it is shown that material has been falsified, plagiarised, or I have otherwise attempted to obtain an unfair advantage for myself or others, I understand that I may face sanctions in accordance with the policies and procedures of the University. A mark of zero may be awarded and the reason for that mark will be recorded on my file.</string>
     <string name="btn_throw">Throw</string>
     <string name="btn_score">Score</string>
+    <string name="img_logo">Game logo. Image of dice with Dice Frenzy written below it</string>
+    <string name="txt_declare">This game was developed as an assignment for my Advanced Mobile Technology module. The goal of the game is to be keep throwing a set of five dice, adding the value of your throws together until you are able to reach a goal. However, if the computer player reaches the goal before you, you lose. You are allowed up to three dice throws per turn but within those three rolls, you must score your throw to add it to your current score. The game is explained as it goes via instructions at the top of the game screen. Please enjoy the game!</string>
+    <string name="img_dice">Dice image</string>
+    <string name="txt_playerDice">Your dice</string>
+    <string name="txt_comDice">Com dice</string>
+    <string name="btn_goal">Set Goal</string>
+    <string name="edit_goal">101</string>
 </resources>

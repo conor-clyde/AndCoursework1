@@ -12,21 +12,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private  Button btnAbout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnAbout = findViewById(R.id.btnAbout);
+        Button btnAbout = findViewById(R.id.btnAbout);
 
-        btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new AboutFragment());
-            }
-        });
+        btnAbout.setOnClickListener(v -> loadFragment(new AboutFragment()));
     }
 
     public void displayGame (View v) {
