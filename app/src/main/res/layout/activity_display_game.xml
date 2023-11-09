@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clyParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4e9572"
+    tools:context=".DisplayGame">
+
+    <View
+        android:id="@+id/vwVerti"
+        android:layout_width="2dp"
+        android:layout_height="420dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnThrow"
+        app:layout_constraintEnd_toStartOf="@+id/imgComDie3"
+        app:layout_constraintStart_toEndOf="@+id/imgPlayerDie4" />
+
+    <View
+        android:id="@+id/vwHoriz"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/vwVerti"
+        app:layout_constraintStart_toEndOf="@+id/imgPlayerDie4" />
+
+    <ImageView
+        android:id="@+id/imgPlayerDie3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie4"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgPlayerDie1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etxtGoal"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgPlayerDie2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie3"
+        app:layout_constraintStart_toEndOf="@+id/imgPlayerDie3"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgPlayerDie4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgPlayerDie5"
+        app:layout_constraintStart_toEndOf="@+id/imgPlayerDie5"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgPlayerDie5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnThrow"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <Button
+        android:id="@+id/btnThrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:width="150dp"
+        android:backgroundTint="@android:color/black"
+        android:enabled="true"
+        android:text="@string/btn_throw"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:width="150dp"
+        android:backgroundTint="@android:color/black"
+        android:onClick="displayGame"
+        android:text="@string/btn_score"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgComDie3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgComDie5"
+        app:layout_constraintEnd_toStartOf="@+id/imgComDie5"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgComDie2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgComDie4"
+        app:layout_constraintEnd_toStartOf="@+id/imgComDie4"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgComDie4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgComDie3"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgComDie5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgComDie1"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <ImageView
+        android:id="@+id/imgComDie1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnScore"
+        app:layout_constraintEnd_toStartOf="@+id/imgComDie5"
+        tools:srcCompat="@drawable/die_face_1" />
+
+    <TextView
+        android:id="@+id/txtPlayerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Score: 0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWins" />
+
+    <TextView
+        android:id="@+id/txtGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Goal:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtInstruct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Set the match goal to start!"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlayerScore" />
+
+    <TextView
+        android:id="@+id/txtComScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="Com Score: 0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWins" />
+
+    <EditText
+        android:id="@+id/etxtGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:width="140dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="101"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/btnGoal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInstruct" />
+
+    <Button
+        android:id="@+id/btnGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:width="150dp"
+        android:backgroundTint="@android:color/black"
+        android:onClick="displayGame"
+        android:text="Set Goal"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etxtGoal"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="H:0/C:0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtComDice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:text="Com Dice"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPlayerDice"
+        app:layout_constraintStart_toEndOf="@+id/vwVerti" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
+    <TextView
+        android:id="@+id/txtPlayerDice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="Your Dice"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/vwVerti"
+        app:layout_constraintEnd_toStartOf="@+id/vwVerti" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

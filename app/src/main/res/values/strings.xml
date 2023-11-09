@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Dice Frenzy</string>
+    <string name="btn_about">About</string>
+    <string name="btn_newGame">New Game</string>
+    <string name="txt_studentID">Student ID: B00785461</string>
+    <string name="txt_studentName">Student Name: Conor Clyde</string>
+    <string name="txt_declare">I declare that this is all my own work. Any material I have referred to has been accurately referenced and any contribution of Artificial Intelligence technology has been fully acknowledged. I have read the University’s policy on academic misconduct and understand the different forms of academic misconduct. If it is shown that material has been falsified, plagiarised, or I have otherwise attempted to obtain an unfair advantage for myself or others, I understand that I may face sanctions in accordance with the policies and procedures of the University. A mark of zero may be awarded and the reason for that mark will be recorded on my file.</string>
+    <string name="btn_throw">Throw</string>
+    <string name="btn_score">Score</string>
+</resources>
