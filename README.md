@@ -1,5 +1,5 @@
 # DiceFrenzyAndroidMobileGame
-Android mobile dice game created for Advanced Mobile Technology.
+Android mobile dice game created for Advanced Mobile Technology. IDE: Android Studio.
 
 Screenshots: <br/>
 <img src="https://github.com/conor-clyde/DiceFrenzyAndroidMobileGame/assets/91070226/9335a9a2-d909-49cc-b5ce-e661e40107f8" width=20%>
